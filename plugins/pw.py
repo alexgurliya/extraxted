@@ -58,13 +58,13 @@ async def account_login(bot: Client, m: Message):
     raw_text1=input1.text
     headers = {
 
-            'Host': 'api.penpencil.xyz',
+            'Host': 'clients-api.penpencil.co',
 
             'authorization': f"Bearer {raw_text1}",
 
-            'client-id': '5eb393ee95fab7468a79d189',
+            'client-id': '5ee9a14f0e10190011c078d1',
 
-            'client-version': '12.84',
+            'client-version': '33',
 
             'user-agent': 'Android',
 
@@ -86,7 +86,7 @@ async def account_login(bot: Client, m: Message):
        'filter': 'false',
        'exam': '',
        'amount': '',
-       'organisationId': '5eb393ee95fab7468a79d189',
+       'organisationId': '5ee9a14f0e10190011c078d1',
        'classes': '',
        'limit': '20',
        'page': '1',
@@ -94,7 +94,7 @@ async def account_login(bot: Client, m: Message):
        'ut': '1652675230446', 
     }
     await editable.edit("**You have these Batches :-\n\nBatch ID : Batch Name**")
-    response = requests.get('https://api.penpencil.xyz/v3/batches/my-batches', params=params, headers=headers).json()["data"]
+    response = requests.get('https://clients-api.penpencil.co/v1/programs/my-batches', params=params, headers=headers).json()["data"]
     for data in response:
         batch=(data["name"])
         #batchId=(data["_id"])
@@ -104,7 +104,7 @@ async def account_login(bot: Client, m: Message):
     editable1= await m.reply_text("**Now send the Batch ID to Download**")
     input3 = message = await bot.listen(editable.chat.id)
     raw_text3 = input3.text
-    response2 = requests.get(f'https://api.penpencil.xyz/v3/batches/{raw_text3}/details', headers=headers).json()["data"]["subjects"]
+    response2 = requests.get(f'https://clients-api.penpencil.co/v1/programs/{raw_text3}/details', headers=headers).json()["data"]["subjects"]
     await editable1.edit("subject : subjectId")
     vj=""
     for data in response2:
@@ -147,16 +147,16 @@ async def account_login(bot: Client, m: Message):
         for y in range(0,len(xv)):
             t =xv[y]
             params1 = {'page': '1','tag': '','contentType': 'exercises-notes-videos','ut': ''}
-            response3 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{t}/contents', params=params1, headers=headers).json()["data"]
+            response3 = requests.get(f'https://clients-api.penpencil.co/v1/programs/{raw_text3}/subjects/{t}/chapters/{t}/topics/{t}/contents', params=params1, headers=headers).json()["data"]
             
             params2 = {'page': '2','tag': '','contentType': 'exercises-notes-videos','ut': ''}
-            response4 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{t}/contents', params=params2, headers=headers).json()["data"]
+            response4 = requests.get(f'https://clients-api.penpencil.co/v1/programs/{raw_text3}/subjects/{t}/chapters/{t}/topics/{t}/contents', params=params2, headers=headers).json()["data"]
             
             params3 = {'page': '3','tag': '','contentType': 'exercises-notes-videos','ut': ''}
-            response5 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{t}/contents', params=params3, headers=headers).json()["data"]
+            response5 = requests.get(f'https://clients-api.penpencil.co/v1/programs/{raw_text3}/subjects/{t}/chapters/{t}/topics/{t}/contents', params=params3, headers=headers).json()["data"]
             
             params4 = {'page': '4','tag': '','contentType': 'exercises-notes-videos','ut': ''}
-            response6 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{t}/contents', params=params4, headers=headers).json()["data"]
+            response6 = requests.get(f'https://clients-api.penpencil.co/v1/programs/{raw_text3}/subjects/{t}/chapters/{t}/topics/{t}/contents', params=params4, headers=headers).json()["data"]
             #await m.reply_text(response3)
             try:
                 for data in response3:
